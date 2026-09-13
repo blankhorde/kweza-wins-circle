@@ -59,29 +59,51 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-primary-strong: var(--primary-strong);
+  --color-ticket: var(--ticket);
+  --color-ticket-foreground: var(--ticket-foreground);
+  --color-perfect: var(--perfect);
+  --color-solved: var(--solved);
+  --color-stuck: var(--stuck);
+  --color-skipped: var(--skipped);
+  --color-border-strong: var(--border-strong);
+  --radius-button: 0.75rem;
+  --shadow-ticket: var(--ticket-shadow);
+  --shadow-ticket-button: var(--ticket-button-shadow);
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.75rem;
+  --background: oklch(0.974 0.025 65);
+  --foreground: oklch(0.22 0.025 55);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.22 0.025 55);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --primary: oklch(0.65 0.19 45);
+  --primary-strong: oklch(0.53 0.16 43);
+  --primary-foreground: oklch(0.99 0.012 75);
+  --secondary: oklch(0.95 0.025 70);
+  --secondary-foreground: oklch(0.22 0.025 55);
+  --muted: oklch(0.96 0.018 70);
+  --muted-foreground: oklch(0.57 0.035 57);
+  --accent: oklch(0.97 0.027 67);
+  --accent-foreground: oklch(0.48 0.12 45);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.9 0.025 68);
+  --border-strong: oklch(0.84 0.035 65);
+  --input: oklch(0.9 0.025 68);
+  --ring: oklch(0.65 0.19 45);
+  --ticket: oklch(0.19 0.025 52);
+  --ticket-foreground: oklch(0.97 0.025 68);
+  --perfect: oklch(0.78 0.14 78);
+  --solved: oklch(0.61 0.15 143);
+  --stuck: oklch(0.66 0.17 43);
+  --skipped: oklch(0.74 0.025 60);
+  --ticket-shadow: 0 24px 50px -24px color-mix(in oklab, var(--foreground) 42%, transparent);
+  --ticket-button-shadow: 0 10px 20px -9px color-mix(in oklab, var(--primary) 65%, transparent);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +162,48 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
+}
+
+@keyframes score-arrive {
+  0% { opacity: 0; transform: translateY(0.75rem) scale(0.94); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes stamp-in {
+  0% { opacity: 0; transform: scale(1.5) rotate(-12deg); }
+  65% { opacity: 1; transform: scale(0.96) rotate(-5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(-5deg); }
+}
+
+@utility animate-score-arrive {
+  animation: score-arrive 500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@utility animate-stamp-in {
+  animation: stamp-in 550ms 240ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@utility ticket-notches {
+  background-image:
+    radial-gradient(circle at 0 50%, var(--background) 0.78rem, transparent 0.82rem),
+    radial-gradient(circle at 100% 50%, var(--background) 0.78rem, transparent 0.82rem);
+  background-position: left, right;
+  background-repeat: no-repeat;
+  background-size: 1.65rem 100%;
+}
+
+@utility ticket-perforation {
+  background-color: var(--perfect);
+  background-image: radial-gradient(circle at 0.58rem 0.55rem, var(--background) 0.27rem, transparent 0.29rem);
+  background-size: 1.35rem 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-score-arrive,
+  .animate-stamp-in {
+    animation: none;
   }
 }
