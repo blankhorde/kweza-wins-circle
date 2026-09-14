@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DirectionLedgerRouteImport } from './routes/direction-ledger'
+import { Route as DirectionScoreboardRouteImport } from './routes/direction-scoreboard'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DirectionLedgerRoute = DirectionLedgerRouteImport.update({
+  id: '/direction-ledger',
+  path: '/direction-ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DirectionScoreboardRoute = DirectionScoreboardRouteImport.update({
+  id: '/direction-scoreboard',
+  path: '/direction-scoreboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/direction-ledger': typeof DirectionLedgerRoute
+  '/direction-scoreboard': typeof DirectionScoreboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/direction-ledger': typeof DirectionLedgerRoute
+  '/direction-scoreboard': typeof DirectionScoreboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/direction-ledger': typeof DirectionLedgerRoute
+  '/direction-scoreboard': typeof DirectionScoreboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/direction-ledger' | '/direction-scoreboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/direction-ledger' | '/direction-scoreboard'
+  id: '__root__' | '/' | '/direction-ledger' | '/direction-scoreboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DirectionLedgerRoute: typeof DirectionLedgerRoute
+  DirectionScoreboardRoute: typeof DirectionScoreboardRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/direction-ledger': {
+      id: '/direction-ledger'
+      path: '/direction-ledger'
+      fullPath: '/direction-ledger'
+      preLoaderRoute: typeof DirectionLedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/direction-scoreboard': {
+      id: '/direction-scoreboard'
+      path: '/direction-scoreboard'
+      fullPath: '/direction-scoreboard'
+      preLoaderRoute: typeof DirectionScoreboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DirectionLedgerRoute: DirectionLedgerRoute,
+  DirectionScoreboardRoute: DirectionScoreboardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

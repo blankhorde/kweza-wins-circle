@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -173,6 +173,10 @@ function Index() {
         <p className="mt-2 max-w-xl text-sm text-muted-foreground">
           Three rounds, poured into the same Kweza score ticket.
         </p>
+        <nav className="mt-3 flex gap-4 text-sm font-bold text-primary">
+          <Link to="/direction-scoreboard">B · Scoreboard</Link>
+          <Link to="/direction-ledger">C · Ledger</Link>
+        </nav>
       </header>
       <div className="mx-auto flex max-w-[1220px] flex-wrap justify-center gap-6">
         {rounds.map((round) => <ResultTicket key={round.game} round={round} />)}
