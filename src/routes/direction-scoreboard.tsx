@@ -33,7 +33,7 @@ function ScoreboardScreen({ round }: { round: RoundResult }) {
           <span className={`size-2.5 shrink-0 rounded-full ${round.accentClass}`} />
           <h2 className="truncate text-sm font-extrabold">{round.game}</h2>
         </div>
-        <span className="text-[10px] font-semibold uppercase text-ticket-foreground/55">Round over</span>
+        <span className="text-[10px] font-semibold uppercase text-ticket-foreground/55">Round complete</span>
       </div>
 
       <div className="flex flex-col items-center px-6 pt-9">
@@ -45,12 +45,13 @@ function ScoreboardScreen({ round }: { round: RoundResult }) {
       </div>
 
       <div className="mx-6 mt-8 rounded-[1rem] bg-ticket-foreground/8 px-5 py-4">
-        <div className="flex items-baseline justify-between">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-ticket-foreground/55">Board position</p>
-          <p className="text-[12px] font-bold text-solved">▲ {climb} places</p>
-        </div>
+        <p className="text-[11px] font-bold uppercase tracking-wide text-ticket-foreground/55">
+          Board position
+        </p>
         <p className="mt-1 text-[40px] font-black leading-none tabular-nums">#{round.rank}</p>
-        <p className="mt-1 text-[12px] text-ticket-foreground/55">was #{round.rankBefore} before this round</p>
+        <p className="mt-1 text-[12px] font-semibold text-solved">
+          ▲ {climb} places from #{round.rankBefore}
+        </p>
       </div>
 
       <div className="px-6 pt-7">
@@ -70,7 +71,7 @@ function ScoreboardScreen({ round }: { round: RoundResult }) {
         </div>
         <div className="mt-5 h-[54px]">
           {round.perfect ? (
-            <div className="animate-stamp-in flex h-full items-center gap-3 rounded-button border-2 border-perfect px-4">
+            <div className="flex h-full items-center gap-3 rounded-button border-2 border-perfect px-4">
               <span className="text-[24px] font-black tabular-nums text-perfect">{round.perfect}</span>
               <p className="text-[12px] font-bold uppercase leading-[1.25] text-ticket-foreground/80">
                 at best-possible
