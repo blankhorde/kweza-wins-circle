@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DirectionLedgerRouteImport } from './routes/direction-ledger'
 import { Route as DirectionScoreboardRouteImport } from './routes/direction-scoreboard'
+import { Route as DirectionScoreboardOptionsRouteImport } from './routes/direction-scoreboard-options'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,58 @@ const DirectionScoreboardRoute = DirectionScoreboardRouteImport.update({
   path: '/direction-scoreboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DirectionScoreboardOptionsRoute =
+  DirectionScoreboardOptionsRouteImport.update({
+    id: '/direction-scoreboard-options',
+    path: '/direction-scoreboard-options',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/direction-ledger': typeof DirectionLedgerRoute
   '/direction-scoreboard': typeof DirectionScoreboardRoute
+  '/direction-scoreboard-options': typeof DirectionScoreboardOptionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/direction-ledger': typeof DirectionLedgerRoute
   '/direction-scoreboard': typeof DirectionScoreboardRoute
+  '/direction-scoreboard-options': typeof DirectionScoreboardOptionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/direction-ledger': typeof DirectionLedgerRoute
   '/direction-scoreboard': typeof DirectionScoreboardRoute
+  '/direction-scoreboard-options': typeof DirectionScoreboardOptionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/direction-ledger' | '/direction-scoreboard'
+  fullPaths:
+    | '/'
+    | '/direction-ledger'
+    | '/direction-scoreboard'
+    | '/direction-scoreboard-options'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/direction-ledger' | '/direction-scoreboard'
-  id: '__root__' | '/' | '/direction-ledger' | '/direction-scoreboard'
+  to:
+    | '/'
+    | '/direction-ledger'
+    | '/direction-scoreboard'
+    | '/direction-scoreboard-options'
+  id:
+    | '__root__'
+    | '/'
+    | '/direction-ledger'
+    | '/direction-scoreboard'
+    | '/direction-scoreboard-options'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DirectionLedgerRoute: typeof DirectionLedgerRoute
   DirectionScoreboardRoute: typeof DirectionScoreboardRoute
+  DirectionScoreboardOptionsRoute: typeof DirectionScoreboardOptionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +106,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DirectionScoreboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/direction-scoreboard-options': {
+      id: '/direction-scoreboard-options'
+      path: '/direction-scoreboard-options'
+      fullPath: '/direction-scoreboard-options'
+      preLoaderRoute: typeof DirectionScoreboardOptionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +120,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DirectionLedgerRoute: DirectionLedgerRoute,
   DirectionScoreboardRoute: DirectionScoreboardRoute,
+  DirectionScoreboardOptionsRoute: DirectionScoreboardOptionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
