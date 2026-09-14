@@ -56,7 +56,7 @@ function LedgerScreen({ round }: { round: RoundResult }) {
         </p>
       </div>
 
-      <div className="mt-5 px-6">
+      <div className="mt-5 h-[186px] px-6">
         <LedgerRow label={`${round.noun.charAt(0).toUpperCase()}${round.noun.slice(1)} played`} value={String(total)} />
         <LedgerRow label="Solved" value={String(solved)} />
         {stuck > 0 ? <LedgerRow label="Stuck" value={String(stuck)} /> : null}

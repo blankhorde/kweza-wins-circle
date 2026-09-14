@@ -72,9 +72,13 @@ function ScoreboardScreen({ round }: { round: RoundResult }) {
           {round.perfect ? (
             <div className="animate-stamp-in flex h-full items-center gap-3 rounded-button border-2 border-perfect px-4">
               <span className="text-[24px] font-black tabular-nums text-perfect">{round.perfect}</span>
-              <p className="text-[12px] font-bold uppercase leading-tight text-ticket-foreground/80">
+              <p className="text-[12px] font-bold uppercase leading-[1.25] text-ticket-foreground/80">
                 at best-possible
-                {round.extra ? <span className="block font-semibold normal-case text-ticket-foreground/55">{round.extra}</span> : null}
+                {round.extra ? (
+                  <span className="mt-0.5 block font-semibold normal-case leading-[1.25] text-ticket-foreground/55">
+                    {round.extra}
+                  </span>
+                ) : null}
               </p>
             </div>
           ) : (
