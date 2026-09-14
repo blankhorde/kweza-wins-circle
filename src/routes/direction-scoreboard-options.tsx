@@ -167,7 +167,7 @@ export const Route = createFileRoute("/direction-scoreboard-options")({
 });
 
 function ScoreboardOptions() {
-  const round = rounds[0]; // Word Weld
+  const round = rounds[0]!; // Word Weld
 
   const options: { variant: ClimbVariant; label: string }[] = [
     { variant: "combined", label: "A. Combined subtitle" },
